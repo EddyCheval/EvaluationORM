@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebSaladesGestion.Models;
+using ORMLibrary;
 
 namespace WebSaladesGestion.ViewModel
 {
     public class SaladeViewModel
     {
         public Salade Salade { get; set; }
+
         public IEnumerable<SelectListItem> AllIngredients { get; set; }
 
         private List<int> _selectedIngredients;

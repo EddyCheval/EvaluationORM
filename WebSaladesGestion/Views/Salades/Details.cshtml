@@ -1,4 +1,4 @@
-﻿@model WebSaladesGestion.Models.Salade
+﻿@model WebSaladesGestion.ViewModel.SaladeViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -6,37 +6,42 @@
 
 <h2>Details</h2>
 
-<div>
+<dd>
     <h4>Salade</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nom)
+            @Html.DisplayNameFor(model => model.Salade.Nom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Nom)
+            @Html.DisplayFor(model => model.Salade.Nom)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Salade.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Salade.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fabricant.Nom)
+            @Html.DisplayNameFor(model => model.Salade.Fabricant.Nom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fabricant.Nom)
+            @Html.DisplayFor(model => model.Salade.Fabricant.Nom)
         </dd>
-
+        <dt>
+            @Html.LabelFor(model => model.AllIngredients, "Ingredient", new { @class = "control-label col-md-2" })
+            </dt>
+            <dd>
+                @Html.ListBoxFor(m => m.SelectedIngredients, Model.AllIngredients)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Salade.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

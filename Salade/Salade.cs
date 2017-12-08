@@ -7,26 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSaladesGestion.Models
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace Salade
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class Salade
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Salade()
         {
             this.Ingredients = new HashSet<Ingredient>();
         }
-    
+        [Key]
         public int ID { get; set; }
+
+        [StringLength(50)]
         public string Nom { get; set; }
+
+        [Column(TypeName = "nvarchar(max)")]
         public string Description { get; set; }
+        
         public Nullable<int> Fabricant_ID { get; set; }
-    
         public virtual Fabricant Fabricant { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }

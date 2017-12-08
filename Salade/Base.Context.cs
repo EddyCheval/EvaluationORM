@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSaladesGestion.Models
+namespace Salade
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BaseEntities : DbContext
+    public partial class SaladesEvaEntities : DbContext
     {
-        public BaseEntities()
-            : base("name=BaseEntities")
+        public SaladesEvaEntities()
+            : base("name=SaladesEvaEntities")
         {
         }
     

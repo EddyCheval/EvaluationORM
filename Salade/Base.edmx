@@ -163,7 +163,7 @@
           <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="*" />
           <End Role="Salades" Type="Self.Salade" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="BaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SaladesEvaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Fabricants" EntityType="Self.Fabricant" />
           <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
@@ -182,7 +182,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SaladesEvaModelStoreContainer" CdmEntityContainer="BaseEntities">
+        <EntityContainerMapping StorageEntityContainer="SaladesEvaModelStoreContainer" CdmEntityContainer="SaladesEvaEntities">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="SaladesEvaModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">

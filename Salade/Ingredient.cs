@@ -7,16 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSaladesGestion.Models
+namespace Salade
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class C__MigrationHistory
+    using System.ComponentModel.DataAnnotations;
+
+    namespace Salade
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public partial class Ingredient
+        {
+            public Ingredient()
+            {
+                this.Salades = new HashSet<Salade>();
+            }
+            [Key]
+            public int Id { get; set; }
+
+            [StringLength(50)]
+            public string Nom { get; set; }
+            public virtual ICollection<Salade> Salades { get; set; }
+        }
     }
 }

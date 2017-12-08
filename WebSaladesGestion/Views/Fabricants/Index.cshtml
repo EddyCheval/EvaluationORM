@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ORMLibrary.Salade>
+﻿@model IEnumerable<ORMLibrary.Fabricant>
 
 @{
     ViewBag.Title = "Index";
@@ -14,15 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Nom)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fabricant.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingredients)
-        </th>
         <th></th>
     </tr>
 
@@ -30,15 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fabricant.Nom)
-        </td>
-        <td>
-            @Html.ListBox("ID", new SelectList(item.Ingredients, "Id", "Nom"))
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

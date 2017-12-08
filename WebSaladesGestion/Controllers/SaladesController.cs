@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WebSaladesGestion.Models;
 using WebSaladesGestion.ViewModel;
+using ORMLibrary;
 
 namespace WebSaladesGestion.Controllers
 {
     public class SaladesController : Controller
     {
-        private BaseEntities db = new BaseEntities();
+        private SaladesContext db = new SaladesContext();
 
         // GET: Salades
         public ActionResult Index()
@@ -29,18 +29,32 @@ namespace WebSaladesGestion.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Salade salade = db.Salades.Find(id);
-            if (salade == null)
+            var SaladeViewModel = new ViewModel.SaladeViewModel
+            {
+                Salade = db.Salades.Include(i => i.Ingredients).First(i => i.ID == id),
+            };
+            //Salade salade = db.Salades.Find(id);
+            if (SaladeViewModel.Salade == null)
             {
                 return HttpNotFound();
             }
-            return View(salade);
+            var SaladesList = db.Ingredients.ToList();
+            SaladeViewModel.AllIngredients = SaladesList.Select(o => new SelectListItem
+            {
+                Text = o.Nom,
+                Value = o.Id.ToString()
+            });
+            
+            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", SaladeViewModel.Salade.Fabricant.ID);
+            
+            return View(SaladeViewModel);
         }
 
         // GET: Salades/Create
         public ActionResult Create()
         {
             ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom");
+            ViewBag.List = new MultiSelectList(db.Ingredients, "Id", "Nom").ToList();
             return View();
         }
 
@@ -58,7 +72,7 @@ namespace WebSaladesGestion.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", salade.Fabricant_ID);
+            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", salade.Fabricant.ID);
             return View(salade);
         }
 
@@ -84,7 +98,9 @@ namespace WebSaladesGestion.Controllers
                 Text = o.Nom,
                 Value = o.Id.ToString()
             });
-            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", SaladeViewModel.Salade.Fabricant_ID);
+            
+            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", SaladeViewModel.Salade.Fabricant.ID);
+            
             return View(SaladeViewModel);
         }
 
@@ -128,7 +144,7 @@ namespace WebSaladesGestion.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", SaladeView.Salade.Fabricant_ID);
+            ViewBag.Fabricant_ID = new SelectList(db.Fabricants, "ID", "Nom", SaladeView.Salade.Fabricant.ID);
             return View(SaladeView);
         }
 

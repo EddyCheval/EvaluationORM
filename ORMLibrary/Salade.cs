@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeFirst
+namespace ORMLibrary
 {
-    class Salade
+    public class Salade
     {
         public Salade()
         {
